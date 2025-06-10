@@ -1,0 +1,29 @@
+/*-- scss:defaults --*/
+
+
+/*-- scss:rules --*/
+
+.reveal .slide-logo {
+  max-height: 3rem !important;
+}
+
+.reveal .slide aside {
+  font-size: 0.4em;
+}
+
+.imgbottom {
+  position: absolute;
+  bottom: 0;
+  right: -20%;
+}
+
+.reveal section ul {
+  display: inline-block;
+  font-size: 0.8em;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+.reveal code {
+  font-size: 1.2em !important;
+}

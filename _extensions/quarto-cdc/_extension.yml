@@ -1,0 +1,12 @@
+title: Quarto-cdc
+author: Oscar de León
+version: 1.0.0
+quarto-required: ">=1.6.0"
+contributes:
+  self-contained: true
+  formats:
+    revealjs:
+      theme: [default, resources/custom.scss]
+      include-before-body:
+      - file: resources/customize-cdc-template.html
+      footer: CDC Centers for Disease Control and Prevention

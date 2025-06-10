@@ -1,0 +1,8 @@
+# file ignores
+*.html
+
+# RStudio project ignores
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata

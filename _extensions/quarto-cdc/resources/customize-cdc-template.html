@@ -1,0 +1,217 @@
+<script id="customize-title-slide" type="text/javascript" charset="utf-8">
+  // add a banner with cio and logo
+  function customize_title_slide() {
+    let title_background = document.querySelector("div.quarto-title-block");
+    let title_slide = document.querySelector("section#title-slide");
+    let cio = title_slide.getAttribute("title-cio");
+    
+    document.querySelector("div.quarto-title-block").innerHTML =
+    '<div class="slide-background-content"></div>' +
+      '<canvas class="gradcdc" id="headerbar" width="' +
+      title_background.clientWidth +
+      '" height="150" style="position: fixed; top: 0; right: 0;">' +
+      'Sorry, your browser does not support canvas.</canvas>';
+    document.querySelector("div.quarto-title-block").innerHTML =
+    document.querySelector("div.quarto-title-block").innerHTML.concat(
+      '<div  style="position: fixed; top: 0; margin-left: 50px; height: 150px; display: table;">',
+      '<span style="font-size: 5vw; font-weight: bold; color: white; display: table-cell; vertical-align: middle;">',
+      cio,
+      "</span></div>",
+      '<div style="position: relative; top: 0; right: 0; color: white;">',
+      '<img ',
+      'src="https://www.cdc.gov/TemplatePackage/5.0/img/logo/cdc-logo-tag-right.svg" ',
+      'style="position: absolute; right: 10px; top: 10px; max-height: 120px; max-width: 40%"',
+      '>',
+      '</div>'
+    );
+    
+    document.querySelector("#headerbar").clientWidth = title_background.clientWidth
+    
+    // Configure the gradient
+    const c = document.getElementById("headerbar");
+    const ctx = c.getContext("2d");
+    
+    // Create linear gradient
+    const grad  = cdc_gradient(
+      ctx,
+      title_background.clientWidth
+    );
+    
+    // Fill rectangle with gradient
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,title_background.clientWidth,150);
+  };
+  
+  
+  
+  // customize section dividers
+  function customize_section_dividers(){
+    let dividers = document.querySelector("div.slides").getElementsByClassName("level1");
+    let width = document.getElementsByClassName("backgrounds")[0].clientWidth
+    
+    for(let i = 0; i < dividers.length; i++) {
+      dividers[i].style.top = "";
+      dividers[i].style.bottom = "0";
+      
+      document.getElementsByClassName("slide-background slide level1")[i].innerHTML =
+      '<div class="slide-background-content"></div>' +
+      '<canvas class="gradcdc" id="dividerbar'+i+'" width="' +
+        width +
+        '" height="150" style="position: fixed; left: 0; top: 0;">' +
+        'Sorry, your browser does not support canvas.</canvas>';
+      
+      
+      document.querySelector("#dividerbar"+i).clientWidth = width
+      
+      // Configure the gradient
+      const c = document.getElementById("dividerbar"+i);
+      const ctx = c.getContext("2d");
+      
+      // Create linear gradient
+      const grad = cdc_gradient(
+        ctx,
+        width
+      );
+      
+      // Fill rectangle with gradient
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,width,150);
+    };
+  }
+  
+  
+  
+  // customize disclaimer slide
+  function customize_disclaimer_slide() {
+    
+    
+    hide_title_logo();
+    
+    // find disclaimer
+    let slides = document.querySelectorAll("section.slide");
+    let disclaimer_index = -1;
+    for(let i = 1; i < slides.length; i++){
+      if (slides[i].id == "disclaimer") {
+        disclaimer_index = i;
+      }
+    }
+    
+    // move the content up
+    document.querySelector("section#disclaimer").style.top = "200px";
+    
+    
+    // remove the "disclaimer" header if present
+    if(document.querySelector("section#disclaimer").children.length > 0) {
+      let child = document.querySelector("section#disclaimer").children[0];
+    
+      if(child.tagName == "H1") {
+        //document.querySelector("section#disclaimer").removeChild(child);
+        child.style.display = "none";
+      }
+    }
+    
+    let disclaimer_background = document.getElementsByClassName("slide-background slide")[disclaimer_index];
+    
+    document.getElementsByClassName("slide-background slide")[disclaimer_index].innerHTML =
+    '<div class="slide-background-content"><h1>Disclaimer</h1></div>' +
+    '<div style="position: relative; height: 100%;">' +
+    '<div style="position: absolute; bottom: 170px; left: 50px; font-size: 0.6em;">' +
+      'For more information, contact CDC</br>' +
+      '1-800-CDC-INFO (232-4636)</br>' +
+      'TTY:  1-888-232-6348</br>cdc.gov</br></br>' +
+      '<span style="color: black !important;">' +
+      'The findings and conclusions in this report are those of the authors and do not necessarily represent the official position of the U. S. Centers for Disease Control and Prevention.' +
+      '</span>' +
+    '</div></div>' +
+    '<canvas class="gradcdc" id="footerbar" width="' +
+      disclaimer_background.clientWidth +
+      '" height="150" style="position: fixed; left: 0; bottom: 0;">' +
+      'Sorry, your browser does not support canvas.</canvas>';
+    
+    document.getElementsByClassName("slide-background slide")[disclaimer_index].innerHTML =
+    document.getElementsByClassName("slide-background slide")[disclaimer_index].innerHTML.concat(
+      '<div style="position: relative; bottom: 0; right: 0; color: white;">',
+      '<img ',
+      'src="https://www.cdc.gov/TemplatePackage/5.0/img/logo/cdc-logo-tag-right.svg" ',
+      'style="position: absolute; right: 10px; bottom: 10px; max-height: 120px; max-width: 40%"',
+      '>',
+      '</div>'
+    );
+    
+    document.querySelector("#footerbar").clientWidth = disclaimer_background.clientWidth
+    
+    // Configure the gradient
+    const c = document.getElementById("footerbar");
+    const ctx = c.getContext("2d");
+    
+    // Create linear gradient
+    const grad = cdc_gradient(
+      ctx,
+      disclaimer_background.clientWidth
+    );
+    
+    // Fill rectangle with gradient
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,disclaimer_background.clientWidth,150);
+  };
+  
+  
+  
+  
+  // hide footer logo on title slide
+  function hide_title_logo() {
+    let title_slide = document.querySelector("section#title-slide");
+    let disclaimer_slide = document.querySelector("section#disclaimer");
+    let logo = document.querySelector("img.slide-logo")
+    
+    if (
+      title_slide.classList.contains('present') ||
+      disclaimer_slide.classList.contains('present')
+    ) {
+      logo.style.display = "none";
+    }
+    
+    Reveal.on( 'slidechanged' , event => {
+      customize_section_dividers()
+      if (event.currentSlide.matches('#title-slide') || event.currentSlide.matches('#disclaimer')) {
+        logo.style.display = "none";
+        
+        if (event.currentSlide.matches('#disclaimer')) {
+          customize_disclaimer_slide();
+        } else {
+          customize_title_slide();
+        }
+      } else {
+        logo.style.display = "block";
+      }
+    });
+  };
+  
+  
+  
+  // banner gradient
+  function cdc_gradient(ctx, width) {
+    const grad = ctx.createLinearGradient(0,0, width,450);
+    grad.addColorStop(0, "#164380");
+    grad.addColorStop(0.055, "#164380");
+    grad.addColorStop(0.055, "#194D93");
+    grad.addColorStop(0.15, "#194D93");
+    grad.addColorStop(0.15, "#1C56A4");
+    grad.addColorStop(0.28, "#1C56A4");
+    grad.addColorStop(0.28, "#1E5DB2");
+    grad.addColorStop(0.55, "#1E5DB2");
+    grad.addColorStop(0.55, "#0057B7"); 
+    grad.addColorStop(1, "#0057B7");
+    return grad;
+  }
+  
+  
+  
+  // call custom functions
+  window.addEventListener("load", (event) => {
+    customize_title_slide();
+    customize_disclaimer_slide();
+    hide_title_logo();
+    customize_section_dividers();
+  });
+</script>

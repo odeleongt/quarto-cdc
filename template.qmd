@@ -1,0 +1,84 @@
+---
+title: Your presentation title
+format:
+  quarto-cdc-revealjs: default
+author:
+  - name: First Author
+    email: YourAddress@cdc.gov
+    affiliations:
+      - name: Centers for Disease Control and Prevention
+  - name: Second Author
+    email: TheirAddress@cdc.gov
+    affiliations:
+      - name: Their affiliation
+brand:
+  logo:
+    large: "https://www.cdc.gov/TemplatePackage/5.0/img/logo/cdc-logo-tag-right-alt.svg"
+  color:
+    palette:
+      cdc-blue: "#0057B7"
+    foreground: cdc-blue
+self-contained: true
+date: last-modified
+title-slide-attributes:
+  title-cio: "Your CIO or blank quotes"
+---
+
+## Informative title
+
+- With some interesting points
+- Listed here
+
+
+
+# A section divider
+
+Possibly with a short subtitle
+
+
+## You can manually add columns
+
+<!-- By adding fenced HTML blocks -->
+:::: {.columns}
+
+::: {.column width="50%"}
+- To show content
+:::
+
+
+::: {.column width="50%"}
+- Side by side
+:::
+
+<!-- It is important to remember to close the fences -->
+::::
+
+
+## You can have Quarto do it
+
+For code and its output:
+
+```{r}
+#| echo: true
+#| output-location: column
+plot(cars)
+```
+
+
+
+
+## More Information
+
+You can learn more about controlling the appearance of RevealJS output here: <https://quarto.org/docs/presentations/revealjs/>
+
+
+
+
+<!-- This last slide is required -->
+# Disclaimer
+
+<!-- You can optionally include your contact information here -->
+<!-- End each line with two spaces -->
+**Contact information**  
+Your name  
+[YourAddress@cdc.gov](mailto:YourAddress@cdc.gov)
