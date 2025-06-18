@@ -6,7 +6,7 @@ Set the working directory in your RStudio session to the folder where you want
 your slides code, and run the following command in the RStudio `Terminal` pane.
 
 ``` bash
-quarto use template odeleongt/quarto-cdc
+quarto use template CDCgov/quarto-cdc
 ```
 
 This will install the extension and create an example `qmd` file that you can
@@ -17,7 +17,7 @@ use as a starting place for your `revealjs` slides.
 
 ## Using
 
-Make sure you keep the `## Disclaimer` slide.
+Make sure you keep the `# Disclaimer` slide.
 It doesn't need to be the last slide, but needs to be there.
 
 You can remove the author `affiliation` fields if you don't want them.
